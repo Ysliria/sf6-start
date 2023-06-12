@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ movie.title }}{% endblock %}
+
+{% block body %}
+    <h1>{{ movie.title }}</h1>
+
+    <hr>
+
+    <section>
+        <aside>
+            <dl class="row">
+                <dt class="col-sm-3">Director</dt>
+                <dd class="col-sm-9">{{ movie.director }}</dd>
+
+                <dt class="col-sm-3">Year</dt>
+                <dd class="col-sm-9">{{ movie.releasedAt }}</dd>
+            </dl>
+        </aside>
+
+        <article>
+            {{ movie.synopsis }}
+        </article>
+    </section>
+{% endblock %}
+

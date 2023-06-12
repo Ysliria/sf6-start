@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MovieController!{% endblock %}
+
+{% block body %}
+    <h1>Movies</h1>
+
+    <hr>
+
+    <section>
+        <h2>Movies list</h2>
+
+        <table class="table table-striped">
+            <caption>Movies list</caption>
+
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Year</th>
+                    <th>Director</th>
+                    <th>Synopsis</th>
+                </tr>
+            </thead>
+
+            <tbody>
+            {% for movie in movies %}
+                <tr>
+                    <td><a href="{{ path('movie_show', {movie: loop.index0}) }}">{{ movie.title }}</a></td>
+                    <td>{{ movie.releasedAt }}</td>
+                    <td>{{ movie.director }}</td>
+                    <td>{{ movie.synopsis }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </section>
+{% endblock %}
