@@ -9,9 +9,9 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/hello', name: 'hello_world_')]
 class HelloWorldController extends AbstractController
 {
-    #[Route('/{name}', name: 'index', requirements: ['name' => "\w+"], methods: ['GET'])]
+    #[Route('/{name}', name: 'index', requirements: ['name' => "\w+"], methods: ['GET'], defaults: ['name' => 'world'])]
     public function index($name): Response
     {
-        return new Response("Hello $name");
+        return new Response("Hello $name!");
     }
 }
