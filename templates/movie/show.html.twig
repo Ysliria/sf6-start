@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ movie.title }}{% endblock %}
+{% block title movie.title|title %}
 
 {% block body %}
     <h1>{{ movie.title }}</h1>
