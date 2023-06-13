@@ -8,6 +8,12 @@
     <hr>
 
     <section>
+        <div>
+            {% for genre in movie.genres %}
+                <span class="badge bg-primary">{{ genre.name }}</span>
+            {% endfor %}
+        </div>
+
         <aside>
             <dl class="row">
                 <dt class="col-sm-3">Director</dt>
