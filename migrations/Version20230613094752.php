@@ -14,7 +14,7 @@ final class Version20230613094752 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return '';
+        return '[MOVIE & GENRE] Add relation';
     }
 
     public function up(Schema $schema): void

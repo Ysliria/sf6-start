@@ -14,7 +14,7 @@ final class Version20230613082925 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return '';
+        return '[MOVIE] Change to Zulu datetime';
     }
 
     public function up(Schema $schema): void
