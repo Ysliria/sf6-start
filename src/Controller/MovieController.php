@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Movie;
 use App\Form\MovieType;
 use App\Repository\MovieRepository;
+use phpDocumentor\Reflection\Types\This;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,40 +31,65 @@ class MovieController extends AbstractController
     }
 
     #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
-    public function new(Request $request, MovieRepository $movieRepository): Response
-    {
-        $movie     = new Movie();
-        $movieForm = $this->createForm(MovieType::class, $movie);
-
-        $movieForm->handleRequest($request);
-
-        if ($movieForm->isSubmitted() && $movieForm->isValid()) {
-            $movieRepository->save($movie, true);
-
-            return $this->redirectToRoute('movie_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->render('movie/new.html.twig', [
-            'movie_form' => $movieForm
-        ]);
-    }
-
     #[Route('/{movie}/update', name: 'update', requirements: ['movie' => '\d+'], methods: ['GET', 'POST'])]
-    public function update(Movie $movie, Request $request, MovieRepository $movieRepository): Response
+    public function manage(Request $request, MovieRepository $movieRepository, ?int $movie): Response
     {
-        $movieForm = $this->createForm(MovieType::class, $movie);
+        $movieEntity = new Movie();
 
+        if (null !== $movie) {
+            $movieEntity = $movieRepository->findOneById($movie);
+        }
+
+        $movieForm = $this->createForm(MovieType::class, $movieEntity);
         $movieForm->handleRequest($request);
 
         if ($movieForm->isSubmitted() && $movieForm->isValid()) {
-            $movieRepository->save($movie, true);
+            $movieRepository->save($movieEntity, true);
 
-            return $this->redirectToRoute('movie_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('movie_show', ['movie' => $movieEntity->getId()], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('movie/update.html.twig', [
+        return $this->render('movie/manage.html.twig', [
             'movie_form' => $movieForm,
-            'movie' => $movie
+            'movie'      => $movieEntity
         ]);
     }
+
+//    #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
+//    public function new(Request $request, MovieRepository $movieRepository): Response
+//    {
+//        $movie     = new Movie();
+//        $movieForm = $this->createForm(MovieType::class, $movie);
+//
+//        $movieForm->handleRequest($request);
+//
+//        if ($movieForm->isSubmitted() && $movieForm->isValid()) {
+//            $movieRepository->save($movie, true);
+//
+//            return $this->redirectToRoute('movie_index', [], Response::HTTP_SEE_OTHER);
+//        }
+//
+//        return $this->render('movie/new.html.twig', [
+//            'movie_form' => $movieForm
+//        ]);
+//    }
+//
+//    #[Route('/{movie}/update', name: 'update', requirements: ['movie' => '\d+'], methods: ['GET', 'POST'])]
+//    public function update(Movie $movie, Request $request, MovieRepository $movieRepository): Response
+//    {
+//        $movieForm = $this->createForm(MovieType::class, $movie);
+//
+//        $movieForm->handleRequest($request);
+//
+//        if ($movieForm->isSubmitted() && $movieForm->isValid()) {
+//            $movieRepository->save($movie, true);
+//
+//            return $this->redirectToRoute('movie_index', [], Response::HTTP_SEE_OTHER);
+//        }
+//
+//        return $this->render('movie/update.html.twig', [
+//            'movie_form' => $movieForm,
+//            'movie' => $movie
+//        ]);
+//    }
 }
