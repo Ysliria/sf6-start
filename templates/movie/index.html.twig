@@ -25,10 +25,10 @@
             <tbody>
             {% for movie in movies %}
                 <tr>
-                    <td><a href="{{ path('movie_show', {movie: loop.index0}) }}">{{ movie.title }}</a></td>
-                    <td>{{ movie.releasedAt }}</td>
-                    <td>{{ movie.director }}</td>
-                    <td>{{ movie.synopsis }}</td>
+                    <td><a href="{{ path('movie_show', {movie: movie.id}) }}">{{ movie.title }}</a></td>
+                    <td>{{ movie.releasedAt|date('Y') }}</td>
+                    <td></td>
+                    <td>{{ movie.plot }}</td>
                 </tr>
             {% endfor %}
             </tbody>
