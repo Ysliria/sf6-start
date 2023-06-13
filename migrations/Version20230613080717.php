@@ -14,7 +14,7 @@ final class Version20230613080717 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return '';
+        return '[MOVIE & GENRE] Initial setup.';
     }
 
     public function up(Schema $schema): void

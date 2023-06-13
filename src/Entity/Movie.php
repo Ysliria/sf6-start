@@ -20,11 +20,14 @@ class Movie
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $poster = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: Types::DATETIMETZ_IMMUTABLE)]
     private ?\DateTimeImmutable $releasedAt = null;
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $plot = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $slug = null;
 
     public function getId(): ?int
     {
@@ -75,6 +78,18 @@ class Movie
     public function setPlot(string $plot): static
     {
         $this->plot = $plot;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): static
+    {
+        $this->slug = $slug;
 
         return $this;
     }
