@@ -1,11 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title 'Add or edit movie' %}
+{% set action = app.request.attributes.get('_route') ends with '_new' ? 'Add' : 'Update' %}
+
+{% block title %}
+    {{ action }} movie
+{% endblock %}
 
 {% block body %}
-    <h1>Add or edit movie</h1>
+    <h1>{{ action }} movie</h1>
 
     <hr>
 
-    {{ include('movie/_form.html.twig') }}
+    {{ include('movie/_form.html.twig', {'button_label': action}) }}
 {% endblock %}
