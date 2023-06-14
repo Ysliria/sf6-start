@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests;
+namespace Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -20,7 +20,6 @@ class HelloWorldControllerTest extends WebTestCase
             'uri' => '/hello/Jean-Lou'
         ];
     }
-
 
     /**
      * @group type/smoke
